@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 uint16_t Arduino_MAX17043::read_reg(MAX17043_regs reg) {
   Wire.beginTransmission(_addr);
-  Wire.write(reg);
+  Wire.write(reg * 2);
   Wire.endTransmission();
 
   _error = false;
@@ -49,7 +49,7 @@ uint16_t Arduino_MAX17043::read_reg(MAX17043_regs reg) {
 void Arduino_MAX17043::write_reg(MAX17043_regs reg, uint16_t val) {
   _error = false;
   Wire.beginTransmission(_addr);
-  if (Wire.write(reg) == 0) {
+  if (Wire.write(reg * 2) == 0) {
     _error = true;
     return;
   }

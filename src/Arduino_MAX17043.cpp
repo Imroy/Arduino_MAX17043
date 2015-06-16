@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <Wire.h>
 #include "Arduino_MAX17043.h"
 
-uint16_t Arduino_MAX17043::read_reg(uint8_t reg) {
+uint16_t Arduino_MAX17043::read_reg(MAX17043_regs reg) {
   Wire.beginTransmission(_addr);
   Wire.write(reg);
   Wire.endTransmission();
@@ -46,7 +46,7 @@ uint16_t Arduino_MAX17043::read_reg(uint8_t reg) {
   return (high << 8) | low;
 }
 
-void Arduino_MAX17043::write_reg(uint8_t reg, uint16_t val) {
+void Arduino_MAX17043::write_reg(MAX17043_regs reg, uint16_t val) {
   _error = false;
   Wire.beginTransmission(_addr);
   if (Wire.write(reg) == 0) {

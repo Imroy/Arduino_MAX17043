@@ -34,8 +34,8 @@ private:
   uint8_t _addr;
   bool _error;
 
-  uint16_t read_reg(uint8_t reg);
-  void write_reg(uint8_t reg, uint16_t val);
+  uint16_t read_reg(MAX17043_regs reg);
+  void write_reg(MAX17043_regs reg, uint16_t val);
 
 public:
   Arduino_MAX17043() :

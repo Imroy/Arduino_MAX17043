@@ -21,12 +21,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include <stdint.h>
 
 enum MAX17043_regs {
-  VCELL = 0x02,		// R/O
-  SOC,			// R/O
-  MODE,			// W/O
-  VERSION,		// R/O
-  CONFIG = 0x0c,	// R/W
-  COMMAND = 0xfe,	// W/O
+  VCELL		= 0x02,	// R/O
+  SOC		= 0x04,	// R/O
+  MODE		= 0x06,	// W/O
+  VERSION	= 0x08,	// R/O
+  CONFIG	= 0x0c,	// R/W
+  COMMAND	= 0xfe,	// W/O
 };
 
 class Arduino_MAX17043 {

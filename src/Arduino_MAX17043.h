@@ -52,12 +52,12 @@ public:
 
   // Cell voltage in volts
   float Vcell(void) {
-    return (float)(read_reg(Register::VCELL) >> 4) * 0.00125;
+    return static_cast<float>(read_reg(Register::VCELL) >> 4) * 0.00125;
   }
 
   // State of charge in percent
   float SoC(void) {
-    return (float)read_reg(Register::SOC) * 0.00390625;
+    return static_cast<float>(read_reg(Register::SOC)) * 0.00390625;
   }
 
   uint16_t version(void) {

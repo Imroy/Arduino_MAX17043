@@ -20,24 +20,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #pragma once
 #include <stdint.h>
 
-// Note: actual register values have to be doubled before sending
-enum MAX17043_regs {
-  VCELL = 1,		// R/O
-  SOC,			// R/O
-  MODE,			// W/O
-  VERSION,		// R/O
-  __REG5,
-  CONFIG,		// R/W
-  COMMAND = 127,	// W/O
-};
-
 class Arduino_MAX17043 {
 private:
+  // Note: actual register values have to be doubled before sending
+  enum class Register : uint8_t {
+    VCELL = 1,		// R/O
+    SOC,		// R/O
+    MODE,		// W/O
+    VERSION,		// R/O
+    __REG5,
+    CONFIG,		// R/W
+
+    COMMAND = 127,	// W/O
+  };
+
   uint8_t _addr;
   bool _error;
 
-  uint16_t read_reg(MAX17043_regs reg);
-  void write_reg(MAX17043_regs reg, uint16_t val);
+  uint16_t read_reg(Register reg);
+  void write_reg(Register reg, uint16_t val);
 
 public:
   Arduino_MAX17043() :
@@ -46,29 +47,29 @@ public:
 
   bool error(void) const { return _error; }
 
-  uint16_t raw_Vcell(void) { return read_reg(VCELL); }
-  uint16_t raw_SoC(void) { return read_reg(SOC); }
+  uint16_t raw_Vcell(void) { return read_reg(Register::VCELL); }
+  uint16_t raw_SoC(void) { return read_reg(Register::SOC); }
 
   // Cell voltage in volts
   float Vcell(void) {
-    return (float)(read_reg(VCELL) >> 4) * 0.00125;
+    return (float)(read_reg(Register::VCELL) >> 4) * 0.00125;
   }
 
   // State of charge in percent
   float SoC(void) {
-    return (float)read_reg(SOC) * 0.00390625;
+    return (float)read_reg(Register::SOC) * 0.00390625;
   }
 
   uint16_t version(void) {
-    return read_reg(VERSION);
+    return read_reg(Register::VERSION);
   }
 
   void reset(void) {
-    write_reg(COMMAND, 0x5400);
+    write_reg(Register::COMMAND, 0x5400);
   }
 
   void quickStart(void) {
-    write_reg(MODE, 0x4000);
+    write_reg(Register::MODE, 0x4000);
   }
 
 };

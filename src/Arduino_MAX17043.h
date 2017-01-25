@@ -1,6 +1,6 @@
 /*
 Arduino_MAX17043.h - MAX17043 class
-Copyright (C) 2015 Ian Tester
+Copyright (C) 2015-2017 Ian Tester
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
